@@ -1,4 +1,4 @@
-package recherche;
+package isetjsaevelt;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class moteur
+ * Servlet implementation class servletsearch
  */
-@WebServlet("/moteur")
-public class moteur extends HttpServlet {
+@WebServlet("/servletsearch")
+public class servletsearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public moteur() {
+    public servletsearch() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,19 +28,21 @@ public class moteur extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String p1 = request.getParameter("p1");
-		String  recherche = request.getParameter("recherche");
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.println("<html><head>");
-		out.println("<title>moteur de recherche</title></head>");
-		out.println("<body  bgcolor='yellow'>");
-		out.println("<p>merci pour votre voix </p>");
-		out.println("<b>"+p1+"</b>");
-		out.println("<b>"+recherche+"</b>");
-		out.println("</body></html>");
 		
+		String rech = request.getParameter("a");
+		String sel = request.getParameter("b");
 		
+		request.setAttribute("a",rech);
+		request.setAttribute("b",sel);
+		
+		 if (sel.equals("Google")) {
+			 response.sendRedirect("http://www.google.com/search?q="+rech);
+		 }
+		 else {
+			 response.sendRedirect("https://search.yahoo.com/search?p="+rech);
+		 }
 	}
 
 	/**
